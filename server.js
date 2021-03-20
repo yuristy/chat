@@ -2,8 +2,14 @@ const express = require('express');
 
 const app = express();
 const server = require('http').Server(app);
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const io = require('socket.io')(server, { cors: { origin: "*" } });
+const io = require('socket.io')(server, {
+    cors:
+    {
+        origin: "*", methods: ["GET", "POST"],
+        credentials: true,
+        transports: ['websocket']
+    }
+});
 
 const rooms = new Map();
 
