@@ -1,12 +1,18 @@
 import React from 'react'
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:9999');
-
 function App() {
+  const connectSocket = () => {
+    io('http://localhost:9999');
+  };
+
   return (
-    <div className="App">
-      Hello
+    <div className="wrapper">
+      <div className="join-block">
+        <input type="text" placeholder="Room ID" value=""></input>
+        <input type="text" placeholder="Ваше имя" value=""></input>
+        <button class="btn btn-success">ВОЙТИ</button>
+      </div>
     </div>
   );
 }
