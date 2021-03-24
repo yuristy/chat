@@ -1,21 +1,10 @@
 const express = require('express');
 
 const app = express();
-/*
-const cors = require('cors');
-*/
+
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-/* {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST'],
-    credentials: true,
-    transports: ['websocket'],
-    optionsSuccessStatus: 200,
-  },
-});
-*/
+
 app.use(express.json());
 
 const rooms = new Map();
