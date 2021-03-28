@@ -10,12 +10,14 @@ app.use(express.json());
 const rooms = new Map();
 
 app.get('/rooms/:id', (req, res) => {
-  const roomId = req.query.id;
-  const obj = {
-    users: [...rooms.get(roomId).get('users').values()],
-    messages: [...rooms.get(roomId).get('messages').values()],
-  };
-  rooms.json(obj);
+  const { id: roomId } = req.params;
+  const obj = rooms.has(roomId)
+    ? {
+        users: [...rooms.get(roomId).get('users').values()],
+        messages: [...rooms.get(roomId).get('messages').values()],
+      }
+    : { users: [], messages: [] };
+  res.json(obj);
 });
 
 app.post('/rooms', (req, res) => {
