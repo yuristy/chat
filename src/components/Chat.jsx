@@ -1,7 +1,7 @@
 import React from 'react';
 import socket from '../socket';
 
-function Chat() {
+function Chat({ users, messages }) {
   const [messageValue, setMessageValue] = React.useState('');
 
   return (
@@ -9,9 +9,11 @@ function Chat() {
       <div className="chat-users">
         Комната: <b>123</b>
         <hr />
-        <b>Онлайн (123):</b>
+        <b>Онлайн: {users.length}</b>
         <ul>
-          <li>Test</li>
+          {users.map((name, index) => (
+            <li key={name + index}>{name}</li>
+          ))}
         </ul>
       </div>
       <div className="chat-messages">
