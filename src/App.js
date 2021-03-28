@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import socket from './socket';
 
 import reducer from './reducer';
@@ -15,26 +15,28 @@ function App() {
     messages: [],
   });
 
-  const onLogin = (obj) => {
+  const onLogin = async (obj) => {
     dispatch({
       type: 'JOINED',
       payload: obj,
     });
     socket.emit('ROOM:JOIN', obj);
+    const { data } = await axios.get(`/rooms/${obj.roomId}`);
+    setUsers(data.users);
+  };
+
+  const setUsers = (users) => {
+    dispatch({
+      type: 'SET_USERS',
+      payload: users,
+    });
   };
 
   React.useEffect(() => {
-    socket.on('ROOM:JOINED', (users) => {
-      dispatch({
-        type: 'SET_USERS',
-        payload: users,
-      });
-    });
+    socket.on('ROOM:SET_USERS', setUsers);
   }, []);
 
   window.socket = socket;
-
-  console.log(state);
 
   return (
     <div className="wrapper">
