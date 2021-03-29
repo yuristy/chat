@@ -1,13 +1,17 @@
 import React from 'react';
 import socket from '../socket';
 
-function Chat({ users, messages, roomId, userName }) {
+function Chat({ users, messages, roomId, userName, onAddMessage }) {
   const [messageValue, setMessageValue] = React.useState('');
 
   const onSendMessage = () => {
     socket.emit('ROOM:NEW_MESSAGE', {
       userName,
       roomId,
+      text: messageValue,
+    });
+    onAddMessage({
+      userName,
       text: messageValue,
     });
     setMessageValue('');
