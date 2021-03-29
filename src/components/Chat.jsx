@@ -1,13 +1,22 @@
 import React from 'react';
 import socket from '../socket';
 
-function Chat({ users, messages }) {
+function Chat({ users, messages, roomId, userName }) {
   const [messageValue, setMessageValue] = React.useState('');
+
+  const onSendMessage = () => {
+    socket.emit('ROOM:NEW_MESSAGE', {
+      userName,
+      roomId,
+      text: messageValue,
+    });
+    setMessageValue('');
+  };
 
   return (
     <div className="chat">
       <div className="chat-users">
-        Комната: <b>123</b>
+        Комната: <b>{roomId}</b>
         <hr />
         <b>Онлайн: {users.length}</b>
         <ul>
@@ -18,12 +27,14 @@ function Chat({ users, messages }) {
       </div>
       <div className="chat-messages">
         <div className="messages">
-          <div className="message">
-            <p>123</p>
-            <div>
-              <span>123</span>
+          {messages.map((message) => (
+            <div className="message">
+              <p>{message.text}</p>
+              <div>
+                <span>{message.userName}</span>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
         <form>
           <textarea
@@ -32,7 +43,11 @@ function Chat({ users, messages }) {
             className="form-control"
             rows="3"
           ></textarea>
-          <button type="button" className="btn btn-primary">
+          <button
+            onClick={onSendMessage}
+            type="button"
+            className="btn btn-primary"
+          >
             Отправить
           </button>
         </form>
