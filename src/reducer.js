@@ -1,4 +1,4 @@
-export default (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case 'JOINED':
       return {
@@ -12,7 +12,7 @@ export default (state, action) => {
       return {
         ...state,
         users: action.payload.users,
-        messages: action.payload.users,
+        messages: action.payload.messages,
       };
 
     case 'SET_USERS':
@@ -28,6 +28,8 @@ export default (state, action) => {
       };
 
     default:
-      break;
+      return state;
   }
 };
+
+export default reducer;
