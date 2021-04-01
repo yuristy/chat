@@ -1,7 +1,11 @@
 const express = require('express');
 
 const app = express();
+/* let port = process.env.PORT || 9999;
+const cors = require('cors');
 
+app.use(cors());
+*/
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
@@ -21,7 +25,7 @@ app.get('/rooms/:id', (req, res) => {
 });
 
 app.post('/rooms', (req, res) => {
-  const { roomId } = req.body;
+  const { roomId, userName } = req.body;
   if (!rooms.has(roomId)) {
     rooms.set(
       roomId,
@@ -62,7 +66,7 @@ io.on('connection', (socket) => {
   console.log('socket connected', socket.id);
 });
 
-server.listen(5000, (err) => {
+server.listen(9999, (err) => {
   if (err) {
     throw Error(err);
   }
