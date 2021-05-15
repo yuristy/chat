@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
   console.log('socket connected', socket.id);
 });
 
-server.listen(9999, (err) => {
+server.listen(process.env.PORT || 3000, (err) => {
   if (err) {
     throw Error(err);
   }
