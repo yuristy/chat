@@ -22,7 +22,7 @@ function App() {
     });
     socket.emit('ROOM:JOIN', obj);
     const { data } = await axios.get(
-      `https://shrouded-meadow-56897.herokuapp.com/rooms/${obj.roomId}`
+      `https://kindachat.herokuapp.com/rooms/${obj.roomId}`
     );
     dispatch({
       type: 'SET_DATA',

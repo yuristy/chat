@@ -27,7 +27,7 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://shrouded-meadow-56897.herokuapp.com/",
+  "proxy": "https://kindachat.herokuapp.com/",
   "browserslist": {
     "production": [
       ">0.2%",
