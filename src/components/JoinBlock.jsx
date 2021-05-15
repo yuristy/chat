@@ -17,7 +17,7 @@ function JoinBlock({ onLogin }) {
     };
 
     setLoading(true);
-    await axios.post('/rooms', obj);
+    await axios.post('https://shrouded-meadow-56897.herokuapp.com/rooms', obj);
     onLogin(obj);
   };
 

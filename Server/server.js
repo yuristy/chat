@@ -1,17 +1,39 @@
 const express = require('express');
 
 const app = express();
-/* let port = process.env.PORT || 9999;
 const cors = require('cors');
 
-app.use(cors());
-*/
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+});
 
 app.use(express.json());
+app.use(cors({ origin: '*' }));
 
 const rooms = new Map();
+
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    'http://127.0.0.1:5000',
+    'http://localhost:5000',
+    'http://127.0.0.1:9000',
+    'http://localhost:9000',
+    'https://silly-johnson-c02272.netlify.app',
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  return next();
+});
 
 app.get('/rooms/:id', (req, res) => {
   const { id: roomId } = req.params;
@@ -66,7 +88,7 @@ io.on('connection', (socket) => {
   console.log('socket connected', socket.id);
 });
 
-server.listen(process.env.PORT || 3000, (err) => {
+server.listen(process.env.PORT || 5000, (err) => {
   if (err) {
     throw Error(err);
   }

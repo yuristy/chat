@@ -21,7 +21,9 @@ function App() {
       payload: obj,
     });
     socket.emit('ROOM:JOIN', obj);
-    const { data } = await axios.get(`/rooms/${obj.roomId}`);
+    const { data } = await axios.get(
+      `https://shrouded-meadow-56897.herokuapp.com/rooms/${obj.roomId}`
+    );
     dispatch({
       type: 'SET_DATA',
       payload: data,
