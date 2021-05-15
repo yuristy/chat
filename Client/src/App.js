@@ -47,8 +47,6 @@ function App() {
     socket.on('ROOM:NEW_MESSAGE', addMessage);
   }, []);
 
-  window.socket = socket;
-
   return (
     <div className="wrapper">
       {!state.joined ? (
