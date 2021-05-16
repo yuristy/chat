@@ -1,6 +1,6 @@
 {
-  "short_name": "chat",
-  "name": "React Express Socket.io Chat",
+  "short_name": "Kindachat",
+  "name": "Chat made with React, Express and Socket.IO",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
