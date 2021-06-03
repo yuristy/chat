@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import socket from '../socket';
 
 function Chat({ users, messages, roomId, userName, onAddMessage }) {
@@ -37,9 +38,13 @@ function Chat({ users, messages, roomId, userName, onAddMessage }) {
       <div className="chat-messages">
         <div ref={messagesRef} className="messages">
           {messages.map((message) => (
-            <div className="message">
+            <div
+              className={classNames('message', {
+                'current-user-message': userName === message.userName,
+              })}
+            >
               <p>{message.text}</p>
-              <div>
+              <div className="message-username">
                 <span>{message.userName}</span>
               </div>
             </div>
