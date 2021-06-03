@@ -23,6 +23,8 @@ function JoinBlock({ onLogin }) {
 
   return (
     <div className="join-block">
+      <h1>Kindachat</h1>
+      <h2>Kinda works ¯\_(ツ)_/¯</h2>
       <input
         type="text"
         placeholder="ID комнаты"
