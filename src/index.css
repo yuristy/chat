@@ -15,7 +15,6 @@
 .join-block {
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
   height: 100vh;
 }
@@ -172,10 +171,11 @@
 
 .chat-users {
   width: auto;
+
 }
 
 .chat-messages {
-  height: 100vh;
+  height: 70vh;
   width: 100vw;
 }
 
